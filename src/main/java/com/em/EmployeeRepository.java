@@ -68,6 +68,37 @@ public class EmployeeRepository {
 
         }
 
+    }
+
+    public void addEmployee(Employee employee){
+        String query =  "INSERT INTO tbl_employee (first_name,last_name,email,salary,hire_date) values(?,?,?,?,?);";
+       // String query =  "INSERT INTO tbl_employee values(?,?,?,?,?);";
+        createConnection();
+        createPreparedStatement(query);
+
+        try {
+            preparedStatement.setString(1, employee.getFirst_name());
+            preparedStatement.setString(2, employee.getLast_name());
+            preparedStatement.setString(3, employee.getEmail());
+            preparedStatement.setDouble(4, employee.getSalary());
+            preparedStatement.setString(5, employee.getHire_date());
+
+            preparedStatement.executeUpdate();
+            System.out.println("Employee Registered");
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }finally {
+            try {
+                statement.close();
+                connection.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+
+        }
+
 
     }
 

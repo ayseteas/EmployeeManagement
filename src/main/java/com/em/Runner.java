@@ -6,8 +6,8 @@ public class Runner {
 
     public static void main(String[] args) {
 
-        EmployeeRepository employeeRepository = new EmployeeRepository();
-        employeeRepository.createTable();
+        EmployeeService employeeService = new EmployeeService();
+        employeeService.createTable();
 
         Scanner scan = new Scanner(System.in);
         int select;
@@ -31,6 +31,7 @@ public class Runner {
              {
                  case 1:
                      //Register an Employee
+                     employeeService.saveEmployee();
                      break;
                  case 2:
                      //List All Employee
