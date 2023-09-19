@@ -91,7 +91,7 @@ public class EmployeeRepository {
             System.out.println(e.getMessage());
         }finally {
             try {
-                statement.close();
+                preparedStatement.close();
                 connection.close();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -101,6 +101,41 @@ public class EmployeeRepository {
 
 
     }
+
+    public Employee findById(int id){
+        createConnection();
+        Employee employee = new Employee();
+        String query = "SELECT * FROM tbl_employee WHERE id=?";
+        createPreparedStatement(query);
+
+        try {
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                employee.setFirst_name(resultSet.getString("first_name"));
+                employee.setLast_name(resultSet.getString("last_name"));
+                employee.setEmail(resultSet.getString("email"));
+                employee.setSalary(resultSet.getDouble("salary"));
+                employee.setHire_date(resultSet.getString("hire_date"));
+
+                employee.setId(resultSet.getInt("id"));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }finally {
+            try {
+                preparedStatement.close();
+                connection.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+
+        }
+        return employee;
+    }
+
 
 
     public void listAllEmployees(){
@@ -120,7 +155,6 @@ public class EmployeeRepository {
                System.out.print("Salary: " + resultSet.getDouble("salary")+ " ");
                System.out.println("Hire Date: " + resultSet.getString("hire_date")+ " ");
 
-
            }
 
         } catch (SQLException e) {
@@ -139,6 +173,45 @@ public class EmployeeRepository {
 
     }
 
+    public void update(Employee newEmployee){
+        String query = "UPDATE tbl_employee SET first_name=?, last_name=?, email=?, salary=?, hire_date=? WHERE id=?";
+        createConnection();
+        createPreparedStatement(query);
+
+        try {
+            preparedStatement.setString(1, newEmployee.getFirst_name());
+            preparedStatement.setString(2, newEmployee.getLast_name());
+            preparedStatement.setString(3, newEmployee.getEmail());
+            preparedStatement.setDouble(4, newEmployee.getSalary());
+            preparedStatement.setString(5, newEmployee.getHire_date());
+            preparedStatement.setInt(6, newEmployee.getId());
+            int updatedRow = preparedStatement.executeUpdate();
+
+            if(updatedRow>0){
+                System.out.println("Employee Updated");
+            }else{
+                System.out.println("Employee Not Found");
+            }
+
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }finally {
+            try {
+                preparedStatement.close();
+                connection.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+
+        }
+
+
+
+
+
+    }
 
 
 }

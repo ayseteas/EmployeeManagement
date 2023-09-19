@@ -39,6 +39,9 @@ public class Runner {
                      break;
                  case 3:
                      //Update an Employee
+                     System.out.println("Enter Employee ID");
+                     int id = scan.nextInt();
+                     employeeService.updateEmployee(id);
                      break;
                  case 4:
                      //Delete an Employee by ID

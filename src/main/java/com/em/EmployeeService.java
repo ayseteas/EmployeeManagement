@@ -34,5 +34,24 @@ public class EmployeeService {
         employeeRepository.listAllEmployees();
     }
 
+    public void updateEmployee(int id){
+
+        Employee employee = employeeRepository.findById(id);
+
+        System.out.println("Enter updated first name: ");
+        employee.setFirst_name(scan.nextLine());
+        System.out.println("Enter updated last name: ");
+        employee.setLast_name(scan.nextLine());
+        System.out.println("Enter updated email address: ");
+        employee.setEmail(scan.nextLine());
+        System.out.println("Enter updated salary: ");
+        employee.setSalary(scan.nextDouble());
+        scan.nextLine();
+        System.out.println("Enter updated hire date: ");
+        employee.setHire_date(scan.nextLine());
+
+        employeeRepository.update(employee);
+
+    }
 
 }
