@@ -7,7 +7,6 @@ public class EmployeeService {
     EmployeeRepository employeeRepository = new EmployeeRepository();
     Scanner scan = new Scanner(System.in);
 
-
     public void createTable(){
         employeeRepository.createTable();
     }
@@ -24,9 +23,7 @@ public class EmployeeService {
         scan.nextLine();
         System.out.println("Enter hire date: ");
         String hire_date = scan.nextLine();
-
         Employee employee = new Employee(first_name, last_name, email, salary, hire_date);
-
         employeeRepository.addEmployee(employee);
     }
 
@@ -52,6 +49,11 @@ public class EmployeeService {
 
         employeeRepository.update(employee);
 
+    }
+
+
+    public void deleteEmployee(int id){
+        employeeRepository.delete(id);
     }
 
 }

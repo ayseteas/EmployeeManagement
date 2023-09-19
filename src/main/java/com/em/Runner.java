@@ -45,6 +45,9 @@ public class Runner {
                      break;
                  case 4:
                      //Delete an Employee by ID
+                     System.out.println("Enter Employee ID");
+                     int id2 = scan.nextInt();
+                     employeeService.deleteEmployee(id2);
                      break;
                  case 0:
                      //Exit
@@ -59,5 +62,6 @@ public class Runner {
 
     }
 
+    //CONGRATULATIONS!
 
 }
