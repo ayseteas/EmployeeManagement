@@ -103,6 +103,41 @@ public class EmployeeRepository {
     }
 
 
+    public void listAllEmployees(){
+        createConnection();
+        createStatement();
+        String query = "SELECT * FROM tbl_employee";
+
+        try {
+           ResultSet resultSet =  statement.executeQuery(query);
+
+           while (resultSet.next() ){
+
+               System.out.print("ID: " + resultSet.getInt("id")+ " ");
+               System.out.print("First Name: " + resultSet.getString("first_name")+ " ");
+               System.out.print("Last Name: " + resultSet.getString("last_name")+ " ");
+               System.out.print("Email Address: " + resultSet.getString("email")+ " ");
+               System.out.print("Salary: " + resultSet.getDouble("salary")+ " ");
+               System.out.println("Hire Date: " + resultSet.getString("hire_date")+ " ");
+
+
+           }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }finally {
+            try {
+                statement.close();
+                connection.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+
+        }
+
+
+
+    }
 
 
 

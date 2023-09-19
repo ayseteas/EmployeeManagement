@@ -30,5 +30,9 @@ public class EmployeeService {
         employeeRepository.addEmployee(employee);
     }
 
+    public void findAllEmployees(){
+        employeeRepository.listAllEmployees();
+    }
+
 
 }

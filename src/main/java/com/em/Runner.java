@@ -35,6 +35,7 @@ public class Runner {
                      break;
                  case 2:
                      //List All Employee
+                     employeeService.findAllEmployees();
                      break;
                  case 3:
                      //Update an Employee
